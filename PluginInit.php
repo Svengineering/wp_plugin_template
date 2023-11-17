@@ -150,6 +150,22 @@ class PluginInit {
 		
 	}
 
+
+	public static function settings_api_init() {
+
+/* 		add_settings_section( 'section-id', 'Title', 'callback', 'page-slug' );
+
+		add_settings_field(
+			'id', 
+			'Title',  
+			[self::$views, 'callback'], 
+			'page-slug', 
+			'section-id');
+		
+		register_setting('option_group', 'option_name'); */
+
+	}
+
 }
 
 

@@ -18,7 +18,13 @@ class PluginInit {
 
 	protected static $controller;
 
+	const PHP_MIN_VERSION = '8.0';
+
 	public static function start() {
+
+		if(!self::is_compatible()) {
+			return;
+		}
 
 		//instantiate objects for MVC
 		self::include_files();
@@ -37,6 +43,7 @@ class PluginInit {
 		self::register_hooks();
 
 		self::register_shortcodes();
+
 	}
 
 
@@ -82,6 +89,7 @@ class PluginInit {
 		define('xxxxxxxx_URL', plugin_dir_url(__FILE__));
 
 		self::$are_constants_set = true;
+
 	}
 
 
@@ -109,6 +117,7 @@ class PluginInit {
 				'manage_options', 
 				'edit-tags.php?taxonomy=proficiency_level' //page slug or admin url as a link i.e. 'edit-tags.php?taxonomy=proficiency_level'
 			); */
+
 	}
 
 	//
@@ -165,6 +174,26 @@ class PluginInit {
 		register_setting('option_group', 'option_name'); */
 
 	}
+
+
+    public static function is_compatible() {
+
+		//check required other plugins:
+/* 		if ( ! is_plugin_active( 'xxxx-plugin-dir/xxxx-plugin-file.php' ) ) {
+			// Stop activation redirect and show error
+			add_action( 'admin_notices', 'callback' );
+			return false;
+		} */
+
+		// Check for required PHP version
+		if ( version_compare( PHP_VERSION, self::PHP_MIN_VERSION, '<' ) ) {
+			add_action( 'admin_notices', 'callback' );
+			return false;
+		}
+
+        return true;
+
+    }
 
 }
 

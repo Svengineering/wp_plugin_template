@@ -11,7 +11,7 @@
  * Author URI: 
  */
 
-//Template Version 1.0
+//Template Version 1.2
 
 namespace VCPlugin;
 defined( 'ABSPATH' ) || exit;

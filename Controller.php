@@ -1,6 +1,6 @@
 <?php
 
-namespace AmeliaEvtList;
+namespace VCPlugin;
 defined( 'ABSPATH' ) || exit; //no direct access
 
 

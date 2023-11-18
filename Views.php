@@ -5,13 +5,12 @@ defined( 'ABSPATH' ) || exit; //no direct access
 
 class Views {
 
-    public Model $model;
+    protected Model $model;
 
 
     public function __construct($model) {
         $this->model = $model;
     }
-
 
 /*     public function admin_page() {
         ?>
@@ -45,6 +44,19 @@ class Views {
     
         <?php
     } */
+
+    public function error_message_wrong_php_version() {  
+        ?>
+            <div class="notice notice-error is-dismissible">
+            <p><?php
+                $str = 'Das Plugin <strong>' . xxxxx_NAME . '</strong> kann nicht gestartet werden, da die vorhandene PHP-Version ' . PHP_VERSION . ' nicht ausreicht.<br />';
+                $str .= "Das Plugin benötigt mindestens die PHP-Version " . PluginInit::PHP_MIN_VERSION . '<br />';
+                $str .= "Bitte deaktiviere das Plugin <strong>" . xxxxx_NAME . "</strong>, um diese Fehlermeldung abzuschalten!";
+                echo $str;
+            ?></p>
+            </div>
+        <?php
+    }
 
 
 }

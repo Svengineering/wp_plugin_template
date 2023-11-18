@@ -22,10 +22,6 @@ class PluginInit {
 
 	public static function start() {
 
-		if(!self::is_compatible()) {
-			return;
-		}
-
 		//instantiate objects for MVC
 		self::include_files();
 
@@ -37,6 +33,10 @@ class PluginInit {
 
 		//define constant, register some stuff
 		self::set_constants();
+
+		if(!self::is_compatible()) {
+			return;
+		}
 		
 		self::$script_manager = new ScriptsManager();
 
@@ -79,14 +79,20 @@ class PluginInit {
 			return true;
 		}
 
-		//DEV environment, for logging (debug) messages
-		define('xxxxxxxx_LOGFILE', './xxxxx/plugin.log');
+		//for logging debug messages/testing
+		define('xxxxxxxx_DEVLOG', './xxxxx/plugindev.log');
+
+		//for logging usual messages, i.e. file operations
+		define('xxxxxxxx_LOG', './xxxxx/plugin.log');
 
 		//plugin base directory (without trailing slash)
 		define('xxxxxxxx_DIR', __DIR__);
 
 		//plugin base url (with trailing slash)
 		define('xxxxxxxx_URL', plugin_dir_url(__FILE__));
+
+		//i.e. for naming the plugin in admin notices
+		define('xxxxxxx_NAME', '.....'); //should be the same as in the beginning of plugin.php
 
 		self::$are_constants_set = true;
 
@@ -187,13 +193,14 @@ class PluginInit {
 
 		// Check for required PHP version
 		if ( version_compare( PHP_VERSION, self::PHP_MIN_VERSION, '<' ) ) {
-			add_action( 'admin_notices', 'callback' );
+			add_action( 'admin_notices', [self::$views, 'error_message_wrong_php_version'] );
 			return false;
 		}
 
         return true;
 
     }
+
 
 }
 

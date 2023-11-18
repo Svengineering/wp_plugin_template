@@ -11,7 +11,9 @@
  * Author URI: 
  */
 
-//Template Version 1.2
+//Note: after changing the name plugin name here, also adjust the plugin name constant in PluginInit.php.
+
+//Template Version 1.3
 
 namespace VCPlugin;
 defined( 'ABSPATH' ) || exit;

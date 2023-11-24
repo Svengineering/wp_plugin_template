@@ -1,13 +1,14 @@
 <?php
 
 namespace VCPlugin;
+use wpdb;
 defined( 'ABSPATH' ) || exit; //no direct access
 
 class Model {
 
-    protected $db = null;
+    protected ?wpdb $db = null;
 
-    protected $prefix;
+    protected string $prefix;
 
     public function __construct() {
         global $wpdb;

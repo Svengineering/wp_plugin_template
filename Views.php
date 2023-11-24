@@ -8,7 +8,7 @@ class Views {
     protected Model $model;
 
 
-    public function __construct($model) {
+    public function __construct(Model $model) {
         $this->model = $model;
     }
 
@@ -45,7 +45,7 @@ class Views {
         <?php
     } */
 
-    public function error_message_wrong_php_version() {  
+    public function error_message_wrong_php_version(): void {  
         ?>
             <div class="notice notice-error is-dismissible">
             <p><?php

@@ -8,19 +8,19 @@ defined( 'ABSPATH' ) || exit; //no direct access
 //
 class PluginInit {
 
-	protected static $are_constants_set = false; //flag, constants must not be declared more than once
+	protected static bool $are_constants_set = false; //flag, constants must not be declared more than once
 
-	protected static $script_manager;
+	protected static ScriptsManager $script_manager;
 
-	protected static $model;
+	protected static Model $model;
 
-	protected static $views;
+	protected static Views $views;
 
-	protected static $controller;
+	protected static Controller $controller;
 
-	const PHP_MIN_VERSION = '8.0';
+	const PHP_MIN_VERSION = '7.4';
 
-	public static function start() {
+	public static function start(): void {
 
 		//instantiate objects for MVC
 		self::include_files();
@@ -47,7 +47,7 @@ class PluginInit {
 	}
 
 
-	protected static function include_files() {
+	protected static function include_files(): void {
 		require_once 'Model.php';
 		require_once 'Views.php';
 		require_once 'ScriptsManager.php';
@@ -56,7 +56,7 @@ class PluginInit {
 	}
 	
 
-	public static function register_hooks() {
+	public static function register_hooks(): void {
 		
 		//adding frontend css and js
 		add_action('wp_enqueue_scripts', [self::$script_manager, 'register_fe_scripts'] );
@@ -73,38 +73,40 @@ class PluginInit {
 	}
 
 
-	protected static function set_constants() {
+	protected static function set_constants(): void {
 	
 		if(self::$are_constants_set) {
-			return true;
+			return;
 		}
 
+		//note: constants also use namespaces but have a fallback to non-namespace constants
+
 		//for logging debug messages/testing
-		define('xxxxxxxx_DEVLOG', './xxxxx/plugindev.log');
+		define('DEVLOG', './xxxxx/plugindev.log');
 
 		//for logging usual messages, i.e. file operations
-		define('xxxxxxxx_LOG', './xxxxx/plugin.log');
+		define('LOG', './xxxxx/plugin.log');
 
 		//plugin base directory (without trailing slash)
-		define('xxxxxxxx_DIR', __DIR__);
+		define('DIR', __DIR__);
 
 		//plugin base url (with trailing slash)
-		define('xxxxxxxx_URL', plugin_dir_url(__FILE__));
+		define('URL', plugin_dir_url(__FILE__));
 
 		//i.e. for naming the plugin in admin notices
-		define('xxxxxxx_NAME', '.....'); //should be the same as in the beginning of plugin.php
+		define('NAME', '.....'); //should be the same as in the beginning of plugin.php
 
 		self::$are_constants_set = true;
 
 	}
 
 
-	public static function register_shortcodes() {
+	public static function register_shortcodes(): void {
 		//nothing so far
 	}
 
 
-	public static function admin_menu_cb() {
+	public static function admin_menu_cb(): void {
 
 		//example usage
 
@@ -129,12 +131,12 @@ class PluginInit {
 	//
 	//for using: register_taxonomy, register_post_type
 	//
-	public static function register_custom_tax_post() {
+	public static function register_custom_tax_post(): void {
 		//register_taxonomy( );
 		//register_post_type()
 	}
 
-	public static function plugin_activate() {
+	public static function plugin_activate(): void {
 		global $wpdb;
 	
 		//example usage
@@ -166,7 +168,7 @@ class PluginInit {
 	}
 
 
-	public static function settings_api_init() {
+	public static function settings_api_init(): void {
 
 /* 		add_settings_section( 'section-id', 'Title', 'callback', 'page-slug' );
 
@@ -182,7 +184,7 @@ class PluginInit {
 	}
 
 
-    public static function is_compatible() {
+    public static function is_compatible(): bool {
 
 		//check required other plugins:
 /* 		if ( ! is_plugin_active( 'xxxx-plugin-dir/xxxx-plugin-file.php' ) ) {

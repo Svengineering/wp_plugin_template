@@ -25,7 +25,7 @@ register_activation_hook( __DIR__ . '/plugin.php', 'VCPlugin\PluginInit::plugin_
 add_action('plugins_loaded', 'VCPlugin\start');
 
 
-function start() {
+function start(): void {
     PluginInit::start();
 
 }

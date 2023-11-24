@@ -28,7 +28,7 @@ class ScriptsManager {
     //  wp_enqueue_script, wp_register_script, 
     //  wp_add_inline_script
     //  wp_localize_script
-    public function register_user_scripts() {
+    public function register_user_scripts(): void {
 
     }
 
@@ -42,7 +42,7 @@ class ScriptsManager {
     //  wp_enqueue_script, wp_register_script, 
     //  wp_add_inline_script
     //  wp_localize_script
-    public function register_admin_scripts($hook_suffix) {
+    public function register_admin_scripts(string $hook_suffix): void {
 
          if($hook_suffix == 'toplevel_page_xxxxx') {
 

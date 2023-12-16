@@ -39,7 +39,7 @@ class Views {
     
         ?>
         <div>
-            <input type='email' id='option_name' name='option_name' value='<?php echo esc_attr($val); ?>'/>
+            <input type='text' id='option_name' name='option_name' value='<?php echo esc_attr($val); ?>'/>
         </div>
     
         <?php

@@ -11,6 +11,7 @@
  * Author URI: 
  */
 
+//Important: version string should match PLUGIN_VERSION constant in PluginInit.php
 //Note: after changing the name plugin name here, also adjust the plugin name constant in PluginInit.php.
 
 //Template Version 1.3

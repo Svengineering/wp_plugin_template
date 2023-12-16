@@ -68,7 +68,13 @@ class PluginInit {
 		add_action('admin_menu', 'VCPlugin\PluginInit::admin_menu_cb' );
 
 		//register taxonomy & post types
-		add_action('init', 'VCPlugin\PluginInit::register_custom_tax_post');
+		add_action('init', 'VCPlugin\PluginInit::register_custom_taxonomies');
+
+		//register taxonomy & post types
+		add_action('init', 'VCPlugin\PluginInit::register_custom_post_types');
+
+		//init Settings API (for settings admin page)
+		add_action('admin_init', 'VCPlugin\PluginInit::settings_api_init');
 
 	}
 
@@ -94,7 +100,10 @@ class PluginInit {
 		define('URL', plugin_dir_url(__FILE__));
 
 		//i.e. for naming the plugin in admin notices
-		define('NAME', '.....'); //should be the same as in the beginning of plugin.php
+		define('NAME', '.....'); 			//should be the same as in the beginning of plugin.php
+
+		define('PLUGIN_VERSION', '.....');  //should be the same as in the beginning of plugin.php
+
 
 		self::$are_constants_set = true;
 
@@ -131,13 +140,38 @@ class PluginInit {
 	//
 	//for using: register_taxonomy, register_post_type
 	//
-	public static function register_custom_tax_post(): void {
+	public static function register_custom_taxonomies(): void {
 		//register_taxonomy( );
 		//register_post_type()
 	}
 
+
+	//
+	//for using: register_taxonomy, register_post_type
+	//
+	public static function register_custom_post_types(): void {
+		//register_taxonomy( );
+		//register_post_type()
+	}
+
+
 	public static function plugin_activate(): void {
+
+		//WICHTIG: hier ist noch gar nichts vom Plugin geladen! Die Start-Routine wurde *nicht* ausgeführt!
+		/*
 		global $wpdb;
+
+		require_once 'Model.php';
+		require_once 'Views.php';
+		require_once 'Controller.php';
+		$model = new Model();
+ 		$views = new Views($model);
+		$controller = new Controller($views, $model);
+
+		self::set_constants();
+
+		self::register_custom_taxonomies();
+		*/
 	
 		//example usage
 		

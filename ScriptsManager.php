@@ -29,7 +29,20 @@ class ScriptsManager {
     //  wp_add_inline_script
     //  wp_localize_script
     public function register_user_scripts(): void {
+        
+/*             wp_register_script(
+                'handle',
+                'src_url',
+                ['dependencies'],
+                PLUGIN_VERSION //!! for forcing cache reload
+            );
 
+            wp_register_style(
+                'handle',
+                'src_url'
+                ['dependencies'],
+                PLUGIN_VERSION //!! force cache reloading
+            ); */
     }
 
 
@@ -45,6 +58,20 @@ class ScriptsManager {
     public function register_admin_scripts(string $hook_suffix): void {
 
          if($hook_suffix == 'toplevel_page_xxxxx') {
+
+/*             wp_register_script(
+                'handle',
+                'src_url',
+                ['dependencies'],
+                PLUGIN_VERSION //!! for forcing cache reload
+            );
+
+            wp_register_style(
+                'handle',
+                'src_url'
+                ['dependencies'],
+                PLUGIN_VERSION //!! force cache reloading
+            ); */
 
     
         }

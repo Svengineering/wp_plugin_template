@@ -173,6 +173,9 @@ class PluginInit {
 		self::register_custom_taxonomies();
 		*/
 	
+		// # A #
+		// DB changes
+
 		//example usage
 		
 /* 		//for DB Delta function
@@ -198,6 +201,28 @@ class PluginInit {
 			COLLATE {$wpdb->collate};";
 
 		dbDelta($sql); */
+
+		// # B # 
+		// save user role capabilites (is persistent!) 
+		// for custom post type capabilities
+
+/* 		self::register_custom_tax_post();
+		$admin_role = get_role('administrator');
+		$caps = [
+			'edit_captypeXY', 
+			'edit_others_captypeXY', 
+			'delete_captypeXY', 
+			'publish_captypeXY', 
+			'read_private_captypeXY',
+			'delete_private_captypeXY',
+			'delete_published_captypeXY',
+			'delete_others_captypeXY',
+			'edit_private_captypeXY',
+			'edit_published_captypeXY'
+		];
+		foreach($caps as $cap) {
+			$admin_role->add_cap($cap, true);
+		} */
 		
 	}
 

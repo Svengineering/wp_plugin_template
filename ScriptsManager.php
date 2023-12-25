@@ -28,7 +28,7 @@ class ScriptsManager {
     //  wp_enqueue_script, wp_register_script, 
     //  wp_add_inline_script
     //  wp_localize_script
-    public function register_user_scripts(): void {
+    public function register_fe_scripts(): void {
         
 /*             wp_register_script(
                 'handle',

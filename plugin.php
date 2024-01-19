@@ -19,7 +19,16 @@
 namespace VCPlugin;
 defined( 'ABSPATH' ) || exit;
 
-require_once 'PluginInit.php';
+
+require 'vendor/autoload.php';
+
+//plugin base directory (without trailing slash)
+define('DIR', __DIR__);
+
+//plugin base url (with trailing slash)
+define('URL', plugin_dir_url(__FILE__));
+
+
 register_activation_hook( __DIR__ . '/plugin.php', 'VCPlugin\PluginInit::plugin_activate' );
 
 //starting the plugin
@@ -27,6 +36,10 @@ add_action('plugins_loaded', 'VCPlugin\start');
 
 
 function start(): void {
+
+    //$start = hrtime(true);
     PluginInit::start();
+    //$end = hrtime(true);
+    //echo "Start-Routine (ms) : " . ($end - $start) / 1000000;
 
 }

@@ -23,7 +23,6 @@ class PluginInit {
 	public static function start(): void {
 
 		//instantiate objects for MVC
-		self::include_files();
 
 		self::$model = new Model();
 
@@ -46,15 +45,6 @@ class PluginInit {
 
 	}
 
-
-	protected static function include_files(): void {
-		require_once 'Model.php';
-		require_once 'Views.php';
-		require_once 'ScriptsManager.php';
-		require_once 'Controller.php';
-
-	}
-	
 
 	public static function register_hooks(): void {
 		
@@ -87,17 +77,26 @@ class PluginInit {
 
 		//note: constants also use namespaces but have a fallback to non-namespace constants
 
+		$home_url = get_option('home');
+
+		switch($home_url) {
+			//LIVE
+			case 'https://abacbac.de':
+				define('LOGFILE_DON', '......');
+			//STAGING
+			case 'xyxy.staging.io':
+				define('LOGFILE_DON', '/.......'); //DEV IONOS
+				break;
+			//LOCAL
+			default:
+				define('LOGFILE_DON', '/web/kunden_dev/.....plugin.log'); //local machine
+		}
+
 		//for logging debug messages/testing
 		define('DEVLOG', './xxxxx/plugindev.log');
 
 		//for logging usual messages, i.e. file operations
 		define('LOG', './xxxxx/plugin.log');
-
-		//plugin base directory (without trailing slash)
-		define('DIR', __DIR__);
-
-		//plugin base url (with trailing slash)
-		define('URL', plugin_dir_url(__FILE__));
 
 		//i.e. for naming the plugin in admin notices
 		define('NAME', '.....'); 			//should be the same as in the beginning of plugin.php
@@ -161,9 +160,6 @@ class PluginInit {
 		/*
 		global $wpdb;
 
-		require_once 'Model.php';
-		require_once 'Views.php';
-		require_once 'Controller.php';
 		$model = new Model();
  		$views = new Views($model);
 		$controller = new Controller($views, $model);
